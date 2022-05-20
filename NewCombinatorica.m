@@ -1,3 +1,5 @@
+(* ::Package:: *)
+
 (* :Title: Combinatorica *)
 
 (* :Authors: Sriram V. Pemmaraju and Steven S. Skiena*)
@@ -2048,7 +2050,7 @@ CageGraph[3,10] :=
                          ]
                 ]/. Graph[l_List, v_List]:>
                     Graph[l, 
-                          Join[Table[{{Cos[#], Sin[#]}}&[2.Pi(i+1/2)/20],
+                          Join[Table[{{Cos[#], Sin[#]}}&[2.Pi (i+1/2)/20],
                                      {i,20}
                                ],
                                2 Table[{{Cos[#],Sin[#]}}&[2.Pi (i+1/2)/50],
@@ -2302,7 +2304,7 @@ CompleteKaryTree[n_Integer?Positive, k_Integer?Positive]:=
          ]
 CompleteQ[g_Graph] := 
         Block[{n = V[g], m = M[g]}, 
-              (SimpleQ[g] && ((UndirectedQ[g] && (m == n(n-1)/2)) || (!UndirectedQ[g] && (m == n(n-1))))) 
+              (SimpleQ[g] && ((UndirectedQ[g] && (m == n (n-1)/2)) || (!UndirectedQ[g] && (m == n(n-1))))) 
         ]
 Compositions[n_Integer,k_Integer] :=
 	Map[
@@ -2855,7 +2857,7 @@ EulerianQ[g_Graph, Directed] := (Message[EulerianQ::obsolete]; EulerianQ[g])
 EulerianQ[g_Graph] := ConnectedQ[g] && (InDegree[g] === OutDegree[g]) /; !UndirectedQ[g]
 EulerianQ[g_Graph] := ConnectedQ[g] && Apply[And,Map[EvenQ, Degrees[g]]] /; UndirectedQ[g]
 ExactRandomGraph[n_Integer,e_Integer] :=
-	Graph[Map[{NthPair[#]}&, Take[ RandomPermutation[n(n-1)/2], e] ], CircularEmbedding[n]]
+	Graph[Map[{NthPair[#]}&, Take[ RandomPermutation[n (n-1)/2], e] ], CircularEmbedding[n]]
 ExpandEdgeOptions[opts_List, i_Integer?Positive, fvp_List, svp_List, aopts_List] :=
         Module[{ec, es, ed, elc, el, elp, lp, nel},
                {ec, es, ed, elc, el, elp, lp} =
@@ -3438,7 +3440,7 @@ GraphPolynomial[n_Integer?Positive, x_, Directed] :=
 GraphPower[g_Graph,1] := g
 GraphPower[g_Graph, k_Integer] :=
         Module[{prod = power = p = ToAdjacencyMatrix[g]},
-               FromAdjacencyMatrix[Do[prod = prod.p; power=power+prod, {k-1}]; power, Vertices[g, All]]
+               FromAdjacencyMatrix[Do[prod = prod . p; power=power+prod, {k-1}]; power, Vertices[g, All]]
         ]
 GraphProduct[g_Graph] := g
 GraphProduct[g_Graph, h_Graph] := Graph[{}, {}] /; (V[g] == 0) || (V[h] == 0)
@@ -4165,7 +4167,7 @@ LineGraph[g_Graph] :=
         ]
 ListGraphs[n_Integer?Positive, m_Integer] := 
     Module[{allBitVectors, distinctBitVectors, graphs, s = KSubsets[Range[n], 2]}, 
-           allBitVectors = Permutations[Join[Table[1, {m}], Table[0, {n(n - 1)/2 - m}]]];
+           allBitVectors = Permutations[Join[Table[1, {m}], Table[0, {n (n - 1)/2 - m}]]];
            distinctBitVectors = OrbitRepresentatives[KSubsetGroup[
                                     SymmetricGroup[n], s], allBitVectors
                                 ];
@@ -4175,7 +4177,7 @@ ListGraphs[n_Integer?Positive, m_Integer] :=
     ]
 
 ListGraphs[n_Integer?Positive] :=
-        Flatten[Table[ListGraphs[n, m], {m, 0, n(n-1)/2}], 1]
+        Flatten[Table[ListGraphs[n, m], {m, 0, n (n-1)/2}], 1]
 
 ListGraphs[n_Integer?Positive, m_Integer, Directed] := 
     Module[{allBitVectors, distinctBitVectors, graphs, 
